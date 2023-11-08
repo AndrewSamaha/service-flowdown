@@ -13,7 +13,7 @@ const server = new ApolloServer({
 const PORT = process.env.PORT ? process.env.PORT : 4000;
 
 startStandaloneServer(server, {
-    listen: { port: 4000 },
+    listen: { port: PORT },
     context: async ({req}) => {
         if (process.env.MOCK_DATASOURCES) {
             return {
