@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "node index.js",
+    "migration:new": "knex migrate:make --knexfile ./lib/db/knex/knexfile.js m",
+    "migration:run:all": "knex migrate:latest --knexpath ./lib/db/knex/"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +21,11 @@
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "graphql": "^16.8.1",
+    "knex": "^3.0.1",
+    "pg": "^8.11.3",
     "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "dotenv-cli": "^7.3.0"
   }
 }
