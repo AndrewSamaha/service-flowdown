@@ -36,27 +36,6 @@ var corsOptions = {
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 
-// await server.start();
-
-// // Set up our Express middleware to handle CORS, body parsing,
-// // and our expressMiddleware function.
-// app.use(
-//     '/',
-//     cors(),
-//     // 50mb is the limit that `startStandaloneServer` uses, but you may configure this to suit your needs
-//     bodyParser.json({ limit: '50mb' }),
-//     // expressMiddleware accepts the same arguments:
-//     // an Apollo Server instance and optional configuration options
-//     expressMiddleware(server, {
-//         context: async ({ req }) => {
-//             const { token } = req.headers;
-//             return {
-//                 token,
-//                 datasources: createDatasources()
-//             }
-//         },
-//     }),
-// );
 
 const PORT = process.env.PORT ? process.env.PORT : 4000;
 
