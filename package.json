@@ -7,7 +7,11 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
     "migration:new": "knex migrate:make --knexfile ./lib/db/knex/knexfile.js m",
-    "migration:run:all": "knex migrate:latest --knexpath ./lib/db/knex/"
+    "seed:new": "knex seed:make",
+    "seed:run:all": "knex seed:run",
+    "migration:run:all": "knex migrate:latest",
+    "migration:rollback:all": "knex migrate:rollback --all",
+    "migration:rollback:one": "knex migrate:rollback"
   },
   "keywords": [],
   "author": "",
