@@ -7,12 +7,16 @@ const { ApolloServerPluginDrainHttpServer } = require( '@apollo/server/plugin/dr
 const express = require( 'express');
 const http = require( 'http');
 const cors = require( 'cors');
-const bodyParser = require('body-parser')
+const knex = require('knex');
 const { typeDefs, resolvers } = require( './lib/graph/index.js');
 const { MockDatasource } = require( './lib/datasources/mock.js');
+const {DbFlowdown} = require('./lib/datasources/DbFlowdown.js');
+const knexConfig = require('./knexfile.js');
 
 const app = express();
 const httpServer = http.createServer(app);
+
+const dbFlowdownConnection = knex(knexConfig);
 
 const server = new ApolloServer({
     typeDefs,
@@ -21,13 +25,14 @@ const server = new ApolloServer({
 });
 
 const createDatasources = () => {
-    if (process.env.MOCK_DATASOURCES) {
+    if (process.env.MOCK_DATASOURCES === 'true') {
+        console.log('Creating mock datasource')
         return {
             db: new MockDatasource()
         }
     }
     return {
-        db: {}
+        db: new DbFlowdown(dbFlowdownConnection)
     }
 }
 
@@ -68,29 +73,3 @@ server.start().then(() => {
     
     console.log(`🚀  Server ready at: ${PORT} `);
 });
-
-
-
-// // Modified server startup
-// new Promise((resolve) => httpServer.listen({ port: PORT }, resolve));
-// console.log(`🚀 Server ready at http://localhost:${PORT}/`);
-
-// startStandaloneServer(server, {
-//     listen: { port: PORT },
-//     context: async ({req}) => {
-//         if (process.env.MOCK_DATASOURCES) {
-//             return {
-//                 datasources: {
-//                     db: new MockDatasource()
-//                 }
-//             }
-//         }
-//         return {
-//             datasources: {
-//                 db: {}
-//             }
-//         }
-//     }
-// }).then(({url}) => {
-//     console.log(`🚀  Server ready at: ${url}`);
-// });
