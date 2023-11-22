@@ -11,7 +11,8 @@
     "seed:run:all": "knex seed:run",
     "migration:run:all": "knex migrate:latest",
     "migration:rollback:all": "knex migrate:rollback --all",
-    "migration:rollback:one": "knex migrate:rollback"
+    "migration:rollback:one": "knex migrate:rollback",
+    "db:reset": "npm run migration:rollback:all && npm run migration:run:all && npm run seed:run:all"
   },
   "keywords": [],
   "author": "",

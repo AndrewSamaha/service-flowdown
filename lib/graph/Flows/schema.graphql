@@ -40,7 +40,45 @@ type Duration {
     float: Float
     string: String
 }
- 
+
+input FlowInput {
+    id: ID
+    name: String
+    sections: [SectionInput]
+    songs: [SongInput]
+    asanas: [AsanaInput]
+}
+
+input SectionInput {
+    id: ID
+    name: String
+    durationString: String
+    order: Int
+}
+
+input AsanaInput {
+    id: ID
+    name: String
+    cue: String
+    durationString: String
+    order: Int
+}
+
+input SongInput {
+    id: ID
+    name: String
+    artist: String
+    durationString: String
+    order: Int
+}
+
 type Query {
     getAllFlows: [Flow]
+    getFlow(flowId: Int): Flow
 }
+
+type Mutation {
+    createNewFlow: Flow
+    updateFlow(flow: FlowInput): Flow
+}
+
