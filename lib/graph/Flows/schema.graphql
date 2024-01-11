@@ -80,5 +80,10 @@ type Query {
 type Mutation {
     createNewFlow: Flow
     updateFlow(flow: FlowInput): Flow
+    updateSongs(flowId: ID, songIds: [ID]): [Song]
+    updateAsanas(flowId: ID, asanaIds: [ID]): [Asana]
+    updateSections(flowId: ID, sectionIds: [ID]): [Section]
+    createSong(song: SongInput): Song
+    createAsana(asana: AsanaInput): Asana
 }
 
